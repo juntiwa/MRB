@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Imports\MedicineMeetingRoomImportController;
 use App\Http\Controllers\MedicineMeetingRoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -20,16 +21,11 @@ Route::get('/', function () {
 });
 
 Route::controller(MedicineMeetingRoomController::class)->group(function () {
-    Route::get('medicine', 'index');
-    Route::post('medicine-import', 'import')->name('medicine.import');
+
+    Route::get('medicine-meeting-rooms', 'index');
+   //  Route::post('medicine-meeting-rooms', 'store')->name('medicine.store');
+
 });
-
-
-
-Route::controller(UserController::class)->group(function () {
-    Route::get('users', 'index');
-    Route::get('users-export', 'export')->name('users.export');
-    Route::post('users-import', 'import')->name('users.import');
-});
+Route::post('medicine-meeting-room-import', MedicineMeetingRoomImportController::class)->name('medicine.store.import');
 
 

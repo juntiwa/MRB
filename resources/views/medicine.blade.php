@@ -9,7 +9,7 @@
 <div class="container">
     <div class="card bg-light mt-3">
         <div class="card-body">
-            <form action="{{ route('medicine.import') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('medicine.store.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
