@@ -13,11 +13,15 @@ class MedicineMeetingRoomController extends Controller
         return view('medicine');
     }
 
-    public function import()
-    {
-      //   Log::info('Ok');
-        Excel::import(new MedicineMeetingRoomsImport, request()->file('file'));
 
-        return back();
-    }
+   //  public function store()
+   //  {
+   //    //   Log::info('Ok');
+   //      Excel::import(new MedicineMeetingRoomsImport, request()->file('file'));
+
+
+
+   //      return back();
+   //  }
+
 }

@@ -23,5 +23,6 @@ class MedicineMeetingRoom extends Model
         'location',
         'images',
 
+
     ];
 }
