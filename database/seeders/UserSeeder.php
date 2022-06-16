@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'division_name' => 'ภ.อายุรศาสตร์',
             'department_name' => 'ภ.อายุรศาสตร์',
             'office_name' => 'สนง.ภาควิชาอายุรศาสตร์',
-            'email' => Str::random(10) . '@gmail.com',
+            'email' => 'juntima.nuc@gmail.com',
             'password_expires_in_days' => random_int(20, 90),
             'remark' => 'สนง.ภาควิชาอายุรศาสตร์ ภ.อายุรศาสตร์',
             'name' => 'น.ส. จันทิมา นุชโยธิน',
