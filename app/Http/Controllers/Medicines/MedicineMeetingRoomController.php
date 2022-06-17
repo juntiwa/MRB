@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Medicines;
 
-use App\Imports\MedicineMeetingRoomsImport;
-use Illuminate\Support\Facades\Log;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class MedicineMeetingRoomController extends Controller
 {
@@ -13,15 +12,10 @@ class MedicineMeetingRoomController extends Controller
         return view('medicine');
     }
 
-
-   //  public function store()
+    //  public function store()
    //  {
    //    //   Log::info('Ok');
    //      Excel::import(new MedicineMeetingRoomsImport, request()->file('file'));
-
-
-
    //      return back();
    //  }
-
 }

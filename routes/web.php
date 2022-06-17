@@ -1,31 +1,32 @@
 <?php
 
+use App\Http\Controllers\Division\DivisionMeetingRoomBookingController;
+use App\Http\Controllers\Division\DivisionMeetingRoomController;
+use App\Http\Controllers\Imports\DivisionMeetingRoomImportController;
 use App\Http\Controllers\Imports\MedicineMeetingRoomImportController;
-use App\Http\Controllers\MedicineMeetingRoomController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Medicine\MedicineMeetingRoomBookingController;
+use App\Http\Controllers\Medicine\MedicineMeetingRoomController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
+// Medicines
 Route::controller(MedicineMeetingRoomController::class)->group(function () {
-
-    Route::get('medicine-meeting-rooms', 'index');
-   //  Route::post('medicine-meeting-rooms', 'store')->name('medicine.store');
-
+    Route::get('medicine-meeting-rooms', 'index')->name('medicine.rooms');
+    //  Route::post('medicine-meeting-rooms', 'store')->name('medicine.store');
 });
 Route::post('medicine-meeting-room-import', MedicineMeetingRoomImportController::class)->name('medicine.store.import');
+Route::controller(MedicineMeetingRoomBookingController::class)->group(function () {
+    Route::get('medicine-meeting-rooms-booking', 'index')->name('medicine.rooms.booking');
+});
 
-
+// Divisions
+Route::controller(DivisionMeetingRoomController::class)->group(function () {
+    Route::get('division-meeting-rooms', 'index')->name('division.rooms');
+});
+Route::post('division-meeting-room-import', DivisionMeetingRoomImportController::class)->name('division.store.import');
+Route::controller(DivisionMeetingRoomBookingController::class)->group(function () {
+    Route::get('division-meeting-rooms-booking', 'index')->name('division.rooms.booking');
+});
