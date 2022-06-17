@@ -22,7 +22,5 @@ class MedicineMeetingRoom extends Model
         'advance_booking_under_days',
         'location',
         'images',
-
-
     ];
 }
