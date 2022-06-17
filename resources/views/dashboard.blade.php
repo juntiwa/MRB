@@ -8,9 +8,14 @@
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-   <div class="bg-slate-400">
-      <a href="{{route('medicine.rooms.booking')}}">จองห้องประชุมภาควิชา</a>
-      
+   <div>
+      <a href="{{route('medicine.rooms.booking')}}" class="bg-slate-400">จองห้องประชุมภาควิชา</a>
+      <a href="{{route('medicine.rooms')}} " class="bg-slate-400">รายละเอียดห้องประชุมภาควิชา</a>
+   </div>
+   <div>
+      <a href="{{route('division.rooms.booking')}}}" class="bg-rose-400">จองห้องประชุมสาขาวิชา</a>
+      <a href="{{route('division.rooms')}} " class="bg-rose-400">รายละเอียดห้องประชุมสาขาวิชา</a>
+
    </div>
 </body>
 </html>
