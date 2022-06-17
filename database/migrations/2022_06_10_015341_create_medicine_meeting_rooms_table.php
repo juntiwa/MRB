@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('medicine_meeting_rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('short_name');
+            $table->string('name')->unique();
+            $table->string('short_name')->unique();
             $table->unsignedTinyInteger('minimum_attendees');
             $table->unsignedSmallInteger('maximum_attendees');
             $table->unsignedSmallInteger('advance_booking_under_days');
