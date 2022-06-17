@@ -12,15 +12,14 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('login');
-            $table->string('password');
-            $table->integer('org_id')->unique();
-            $table->string('full_name');
-            $table->foreignId('division_id');
+        Schema::create('divisions', function (Blueprint $table) {
+            $table->id(); // unsigned big integer
+            $table->string('name_th');
+            $table->string('name_short_th');
+            $table->string('name_en');
+            $table->string('name_short_en');
+            $table->foreignId('department_id')->constrained();
             $table->boolean('active')->default(true);
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('divisions');
     }
 };
