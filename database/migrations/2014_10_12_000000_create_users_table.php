@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('login');
             $table->string('password');
             $table->integer('org_id')->unique();
-            $table->string('full_name');
+            $table->string('full_name')->collation('utf8mb4_thai_520_w2');
             $table->foreignId('division_id');
             $table->boolean('active')->default(true);
             $table->rememberToken();
