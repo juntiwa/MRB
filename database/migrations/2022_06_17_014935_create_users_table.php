@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->integer('org_id')->unique();
             $table->string('full_name')->collation('utf8mb4_thai_520_w2');
             $table->foreignId('division_id');
+            $table->foreign('division_id')->references('id')->on('divisions');
             $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
