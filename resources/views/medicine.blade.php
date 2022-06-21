@@ -19,6 +19,29 @@
         </div>
     </div>
 </div>
-     
+ <div class="container">
+   <table>
+      <thead>
+         <th>name</th>
+         <th>short_name</th>
+         <th>minimum_attendees</th>
+         <th>maximum_attendees</th>
+         <th>advance_booking_under_days</th>
+         <th>location</th>
+         <th>images</th>
+      </thead>
+      @foreach ($medicines as $medicine)
+      <tbody>
+         <td> {{$medicine->name}} </td>
+         <td> {{$medicine->short_name}} </td>
+         <td> {{$medicine->minimum_attendees}} </td>
+         <td> {{$medicine->maximum_attendees}} </td>
+         <td> {{$medicine->advance_booking_under_days}} </td>
+         <td> {{$medicine->location}} </td>
+         <td> {{$medicine->images}} </td>
+      </tbody>
+      @endforeach
+   </table>
+</div>    
 </body>
 </html>
