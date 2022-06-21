@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Medicines;
 
 use App\Http\Controllers\Controller;
+use App\Models\MedicineMeetingRoom;
 use Illuminate\Http\Request;
 
 class MedicineMeetingRoomBookingController extends Controller
@@ -14,7 +15,9 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function index()
     {
-        return view('medicinebooking');
+        $medicines = MedicineMeetingRoom::get();
+
+        return view('medicinebooking', compact('medicines'));
     }
 
     /**
