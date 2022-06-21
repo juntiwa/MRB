@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('name_th')->collation('utf8mb4_thai_520_w2');
+            $table->string('name_th');
             $table->string('name_short_th');
             $table->string('name_en');
             $table->string('name_short_en');
