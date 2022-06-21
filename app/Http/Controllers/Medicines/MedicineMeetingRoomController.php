@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Medicines;
 
 use App\Http\Controllers\Controller;
+use App\Models\MedicineMeetingRoom;
 use Illuminate\Http\Request;
 
 class MedicineMeetingRoomController extends Controller
 {
     public function index()
     {
-        return view('medicine');
+        $medicines = MedicineMeetingRoom::get();
+
+        return view('medicine', compact('medicines'));
     }
 
     //  public function store()
