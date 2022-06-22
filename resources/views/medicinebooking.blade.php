@@ -10,6 +10,7 @@
 </head>
 <body>
    <form action="{{route('medicine.store')}}" method="post" class="m-3 flex flex-col w-1/2 leading-loose">
+      @csrf
       <label for="title">หัวเรื่อง</label>
       <input type="text" name="title" id="title" class="border border-slate-800 rounded">
 
@@ -36,13 +37,20 @@
 
       <label for="checkbox">อุปกรณ์ที่ต้องการ</label>
      <div class="flex">
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="computer" id="computer"> Computer</p>
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="lcdprojecter" id="lcdprojecter"> LCD Projecter</p>
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="visualizer" id="visualizer"> Visualizer</p>
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="sound" id="sound"> ระบบเสียง</p>
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="other" id="other"> อื่น ๆ</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[computer]" id="computer"> Computer</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[lcdprojecter]" id="lcdprojecter"> LCD Projecter</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[visualizer]" id="visualizer"> Visualizer</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[sound]" id="sound"> ระบบเสียง</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[other]" id="other"> อื่น ๆ</p>
       <p class="mr-2"><input class="mr-3 border border-slate-800 rounded" type="text" name="input_other" id="input_other" placeholder="โปรดระบุ"></p>
       <p class="mr-2"><input type="submit" value="บันทึกการจอง" class="bg-blue-500 px-2 py-2 rounded text-white cursor-pointer"></p>
+     </div>
+
+     <div>
+      <input type="checkbox" name="obj['field1']">
+      <input type="checkbox" name="obj['field2']">
+      <input type="checkbox" name="obj['field3']">
+      <input type="checkbox" name="obj['field4']">
      </div>
       
    </form>
