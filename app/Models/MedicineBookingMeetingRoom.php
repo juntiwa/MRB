@@ -12,9 +12,11 @@ class MedicineBookingMeetingRoom extends Model
 
     protected $fillable = [
       'title',
-      'name_coordinate',
+      'comment',
       'start',
       'end',
+      'meeting_room_id',
+      'name_coordinate',
       'equipment',
   ];
     protected $casts = [

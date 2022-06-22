@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MedicineBookingMeetingRoom;
 use App\Models\MedicineMeetingRoom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MedicineMeetingRoomBookingController extends Controller
 {
@@ -31,7 +32,7 @@ class MedicineMeetingRoomBookingController extends Controller
     {
         $medicines = MedicineMeetingRoom::get();
 
-        return view('medicinebooking', compact('medicines'));
+        return view('medicinebooking', ['medicines' => $medicines]);
     }
 
     /**
@@ -42,12 +43,27 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function store(Request $request)
     {
-        //   return $request->all();
+        return $request->all();
         // validate
         // change checkbox "on" => true
-        $bookings = MedicineBookingMeetingRoom::create($request->all());
+        $request->validate([
+           'title' => 'required',
+           'start' => 'required',
+           'end' => 'required',
+           'meeting_room_id' => 'required',
+          ]);
 
-        return view('booking', compact('bookings'));
+        $bookings = new MedicineBookingMeetingRoom;
+        $bookings->title = $request->title;
+        $bookings->comment = $request->comment;
+        $bookings->start = $request->start;
+        $bookings->end = $request->end;
+        $bookings->meeting_room_id = $request->meeting_room_id;
+        $bookings->name_coordinate = $request->name_coordinate;
+        $bookings->equipment = $request->equipment;
+        $bookings->save();
+
+        return Redirect::route('medicine.rooms.booking');
     }
 
     /**

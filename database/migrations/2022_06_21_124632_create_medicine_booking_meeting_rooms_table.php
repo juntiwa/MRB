@@ -15,9 +15,11 @@ return new class extends Migration {
         Schema::create('medicine_booking_meeting_rooms', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('name_coordinate');
+            $table->text('comment')->nullable();
             $table->timestamp('start');
             $table->timestamp('end');
+            $table->unsignedSmallInteger('meeting_room_id');
+            $table->string('name_coordinate')->nullable();
             $table->json('equipment')->nullable();
             $table->timestamps();
         });
