@@ -16,13 +16,12 @@
       <label for="comment">รายละเอียดเพิ่มเติม</label>
       <textarea name="comment" id="comment" cols="30" rows="10" class="border border-slate-800 rounded"></textarea>
 
-      <label for="name_coordinate">วันที่จอง</label>
-      <input type="date" name="from_date" id="from_date" class="border border-slate-800 rounded">
-      <input type="date" name="to_date" id="to_date" class="border border-slate-800 rounded">
-
-      <label for="name_coordinate">เวลาที่จอง</label>
-      <input type="time" name="from_time" id="from_time" class="border border-slate-800 rounded">
-      <input type="time" name="to_time" id="to_time" class="border border-slate-800 rounded">
+      <label for="datetime">วันที่จอง</label>
+      <div class="flex">
+         <input type="datetime-local" name="start" id="start" class="border border-slate-800 rounded">
+         <input type="datetime-local" name="end" id="end" class="border border-slate-800 rounded">
+      </div>
+      
 
       <label for="room_meeting">ห้องประชุมที่ต้องการจอง</label>
       <select name="room_meeting" id="room_meeting" class="border border-slate-800 rounded">
@@ -31,23 +30,21 @@
          @endforeach
       </select>
 
-      <label for="name_responsible">ชื่อผู้รับผิดชอบ</label>
-      <input type="text" name="name_responsible" id="name_responsible" class="border border-slate-800 rounded">
 
       <label for="name_coordinate">ชื่อผู้ประสานงาน</label>
       <input type="text" name="name_coordinate" id="name_coordinate" class="border border-slate-800 rounded">
 
-      <label for="name_coordinate">เบอร์โทรติดต่อ</label>
-      <input type="text" name="name_coordinate" id="name_coordinate" class="border border-slate-800 rounded">
-
       <label for="checkbox">อุปกรณ์ที่ต้องการ</label>
-      <input type="checkbox" name="computer" id="computer">Computer
-      <input type="checkbox" name="lcdprojecter" id="lcdprojecter">LCD Projecter
-      <input type="checkbox" name="visualizer" id="visualizer">Visualizer
-      <input type="checkbox" name="sound" id="sound">ระบบเสียง
-      <input type="checkbox" name="other" id="other">อื่น ๆ
-      <input type="text" name="input_other" id="input_other" placeholder="โปรดระบุ">
-      <input type="submit" value="บันทึกการจอง" class="bg-blue-500 px-2 py-2 rounded text-white cursor-pointer">
+     <div class="flex">
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="computer" id="computer"> Computer</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="lcdprojecter" id="lcdprojecter"> LCD Projecter</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="visualizer" id="visualizer"> Visualizer</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="sound" id="sound"> ระบบเสียง</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="other" id="other"> อื่น ๆ</p>
+      <p class="mr-2"><input class="mr-3 border border-slate-800 rounded" type="text" name="input_other" id="input_other" placeholder="โปรดระบุ"></p>
+      <p class="mr-2"><input type="submit" value="บันทึกการจอง" class="bg-blue-500 px-2 py-2 rounded text-white cursor-pointer"></p>
+     </div>
+      
    </form>
 </body>
 </html>
