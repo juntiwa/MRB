@@ -24,8 +24,9 @@
       </div>
       
 
-      <label for="room_meeting">ห้องประชุมที่ต้องการจอง</label>
-      <select name="room_meeting" id="room_meeting" class="border border-slate-800 rounded">
+      <label for="meeting_room_id">ห้องประชุมที่ต้องการจอง</label>
+      <select name="meeting_room_id" id="meeting_room_id" class="border border-slate-800 rounded">
+         <option value="">เลือกห้องประชุมที่ต้องการ</option>
          @foreach ($medicines as $medicine)
          <option value="{{$medicine->id}}">  {{$medicine->name}} รองรับจำนวน {{$medicine->minimum_attendees}} - {{$medicine->maximum_attendees}} คน </option>
          @endforeach
@@ -37,11 +38,11 @@
 
       <label for="checkbox">อุปกรณ์ที่ต้องการ</label>
      <div class="flex">
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[computer]" id="computer"> Computer</p>
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[lcdprojecter]" id="lcdprojecter"> LCD Projecter</p>
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[visualizer]" id="visualizer"> Visualizer</p>
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[sound]" id="sound"> ระบบเสียง</p>
-      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[other]" id="other"> อื่น ๆ</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[computer]" id="computer" value="true"> Computer</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[lcdprojecter]" id="lcdprojecter" value="true"> LCD Projecter</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[visualizer]" id="visualizer" value="true"> Visualizer</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[sound]" id="sound" value="true"> ระบบเสียง</p>
+      <p class="mr-2"><input class="mr-3" type="checkbox" name="equipment[other]" id="other" value="true"> อื่น ๆ</p>
       <p class="mr-2"><input class="mr-3 border border-slate-800 rounded" type="text" name="input_other" id="input_other" placeholder="โปรดระบุ"></p>
       <p class="mr-2"><input type="submit" value="บันทึกการจอง" class="bg-blue-500 px-2 py-2 rounded text-white cursor-pointer"></p>
      </div>
