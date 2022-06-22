@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('name_coordinate');
             $table->timestamp('start');
             $table->timestamp('end');
-            $table->json('equipment');
+            $table->json('equipment')->nullable();
             $table->timestamps();
         });
     }

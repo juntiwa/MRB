@@ -14,28 +14,57 @@
          <th>name_coordinate</th>
          <th>start</th>
          <th>end</th>
-         <th>equipment</th>
+         {{-- <th>equipment</th> --}}
       </thead>
-      @foreach ($bookings as $booking)
       <tbody>
+         @foreach ($bookings as $booking)
          <td>
-            {{$booking->titile}}
+            {{ $booking->titile }}
          </td>
          <td>
-
+            {{ $booking->titile }}
          </td>
          <td>
-
+            {{ $booking->titile }}
          </td>
          <td>
-
+            {{ $booking->titile }}
          </td>
-         <td>
-
-         </td>
+         {{-- <td>
+            {{ $booking->titile }}
+         </td> --}}
+         @endforeach
       </tbody>
-      @endforeach
       
+   </table>
+
+   <hr>
+   <table>
+      <tr>
+         <td>title</td>
+         <td>name_coordinate</td>
+         <td>start</td>
+         <td>end</td>
+      </tr>
+      @foreach ($bookings as $booking)
+      <tr>
+         <td>
+            {{ $booking->title }}
+         </td>
+         <td>
+            {{ $booking->name_coordinate }}
+         </td>
+         <td>
+            {{ $booking->start }}
+         </td>
+         <td>
+            {{ $booking->end }}
+         </td>
+         {{-- <td>
+            {{ $booking->title }}
+         </td> --}}
+      </tr>
+      @endforeach
    </table>
 </body>
 </html>

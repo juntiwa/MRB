@@ -18,7 +18,8 @@ class MedicineMeetingRoomBookingController extends Controller
     {
         $bookings = MedicineBookingMeetingRoom::all();
 
-        return view('booking', compact('bookings'));
+        //   return view('booking', compact('bookings'));
+        return view('booking', ['bookings' => $bookings]);
     }
 
     /**
@@ -41,9 +42,12 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function store(Request $request)
     {
-        $booking = MedicineBookingMeetingRoom::created($request->all());
+        //   return $request->all();
+        // validate
+        // change checkbox "on" => true
+        $bookings = MedicineBookingMeetingRoom::create($request->all());
 
-        return view('');
+        return view('booking', compact('bookings'));
     }
 
     /**
