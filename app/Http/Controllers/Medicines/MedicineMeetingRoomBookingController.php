@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Medicines;
 
 use App\Http\Controllers\Controller;
+use App\Models\MedicineBookingMeetingRoom;
 use App\Models\MedicineMeetingRoom;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,9 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function index()
     {
-        $medicines = MedicineMeetingRoom::get();
+        $bookings = MedicineBookingMeetingRoom::all();
 
-        return view('medicinebooking', compact('medicines'));
+        return view('booking', compact('bookings'));
     }
 
     /**
@@ -27,7 +28,9 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function create()
     {
-        //
+        $medicines = MedicineMeetingRoom::get();
+
+        return view('medicinebooking', compact('medicines'));
     }
 
     /**
@@ -38,7 +41,9 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $booking = MedicineBookingMeetingRoom::created($request->all());
+
+        return view('');
     }
 
     /**
