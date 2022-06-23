@@ -43,25 +43,33 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+      
+      //   return $request->all();
         // validate
         // change checkbox "on" => true
-        $request->validate([
-           'title' => 'required',
+         $validated = $request->validate([
+           'title' => 'required|string|max:255',
            'start' => 'required',
            'end' => 'required',
-           'meeting_room_id' => 'required',
+           'meeting_room_id' => 'required|exists:medicine_meeting_rooms,id',
+           'equipment.computer' => 'regex:/on/i',
+           'equipment.lcdprojecter' => 'regex:/on/i',
+           'equipment.visualizer' => 'regex:/on/i',
+           'equipment.sound' => 'regex:/on/i',
+           'equipment.other' => 'nullable|string|max:255',
           ]);
 
-        $bookings = new MedicineBookingMeetingRoom;
-        $bookings->title = $request->title;
-        $bookings->comment = $request->comment;
-        $bookings->start = $request->start;
-        $bookings->end = $request->end;
-        $bookings->meeting_room_id = $request->meeting_room_id;
-        $bookings->name_coordinate = $request->name_coordinate;
-        $bookings->equipment = $request->equipment;
-        $bookings->save();
+      //   $bookings = new MedicineBookingMeetingRoom;
+      //   $bookings->title = $request->title;
+      //   $bookings->comment = $request->comment;
+      //   $bookings->start = $request->start;
+      //   $bookings->end = $request->end;
+      //   $bookings->meeting_room_id = $request->meeting_room_id;
+      //   $bookings->name_coordinate = $request->name_coordinate;
+      //   $bookings->equipment = $request->equipment;
+      //   $bookings->save();
+
+        MedicineBookingMeetingRoom::create($validated);
 
         return Redirect::route('medicine.rooms.booking');
     }
