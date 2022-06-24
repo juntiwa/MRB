@@ -44,6 +44,11 @@ class User extends Authenticatable
     public function division()
     {
         // return $this->belongsTo(Division::class, 'foreign_key', 'owner_key');
-        return $this->belongsTo(Division::class, 'division_id', 'id');
+        return $this->belongsTo(Division::class);
+    }
+
+    public function department()
+    {
+        //
     }
 }

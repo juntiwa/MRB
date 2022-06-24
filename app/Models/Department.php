@@ -9,9 +9,14 @@ class Department extends Model
 {
     use HasFactory;
 
-    public function division()
+    public function divisions()
     {
         // return $this->belongsTo(Division::class, 'foreign_key', 'owner_key');
-        return $this->hasMany(Division::class, 'department_id', 'id');
+        return $this->hasMany(Division::class);
+    }
+
+    public function users()
+    {
+        //
     }
 }
