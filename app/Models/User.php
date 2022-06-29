@@ -49,6 +49,7 @@ class User extends Authenticatable
 
     public function department()
     {
-        //
+        //Unknown column 'departments.user_id' in 'field list'
+        return $this->hasManyThrough(Division::class, Department::class);
     }
 }
