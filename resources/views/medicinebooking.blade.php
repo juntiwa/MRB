@@ -18,6 +18,7 @@
         </ul>
     </div>
 @endif
+
    <form action="{{route('medicine.store')}}" method="post" class="m-3 flex flex-col w-1/2 leading-loose">
       @csrf
       <label for="title">หัวเรื่อง</label>
@@ -25,13 +26,6 @@
 
       <label for="comment">รายละเอียดเพิ่มเติม</label>
       <textarea name="comment" id="comment" cols="30" rows="10" class="border border-slate-800 rounded" value="{{old('comment')}}"></textarea>
-
-      <label for="datetime">วันที่จอง</label>
-      <div class="flex">
-         <input type="datetime-local" name="start" id="start" class="border border-slate-800 rounded" value="{{old('start')}}" required>
-         <input type="datetime-local" name="end" id="end" class="border border-slate-800 rounded" value="{{old('end')}}" required>
-      </div>
-      
 
       <label for="meeting_room_id">ห้องประชุมที่ต้องการจอง</label>
       <select name="meeting_room_id" id="meeting_room_id" class="border border-slate-800 rounded" required>

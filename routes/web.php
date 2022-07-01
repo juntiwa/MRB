@@ -22,6 +22,7 @@ Route::controller(MedicineMeetingRoomBookingController::class)->group(function (
     Route::get('medicine-meeting-rooms-booking', 'index')->name('medicine.rooms.booking');
     Route::get('medicine-meeting-room-booking-create', 'create')->name('medicine.create');
     Route::post('medicine-meeting-room-booking', 'store')->name('medicine.store');
+    Route::get('medicine-meeting-room-booking-show', 'show')->name('medicine.show');
 });
 
 // Divisions

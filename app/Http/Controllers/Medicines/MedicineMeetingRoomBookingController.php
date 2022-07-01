@@ -17,10 +17,7 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function index()
     {
-        $bookings = MedicineBookingMeetingRoom::all();
-
-        //   return view('booking', compact('bookings'));
-        return view('booking', ['bookings' => $bookings]);
+        return view('condition');
     }
 
     /**
@@ -101,9 +98,90 @@ class MedicineMeetingRoomBookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $startdate = date('Y-m-d H:i:s', strtotime($request->get('start')));
+        $enddate = date('Y-m-d H:i:s', strtotime($request->get('end')));
+        $attendees = $request->get('attendees');
+
+        // (start_input <= end_exists) and (end_input >= start_exists)
+        /*
+         * SELECT *
+         * FROM medicine_booking_meeting_rooms
+         * WHERE ($startdate <= end)
+         *   AND ($enddate >= start)
+         *   AND ห้องที่สอดคล้องกับจำนวนคน
+         *
+         *   1. สมมติหาได้ว่าห้องที่สอดคล้องกับจำนวนคนคือไอดีต่อไปนี้ [5, 10, 15]
+         *   2. หาว่า (start_input <= end_exists) and (end_input >= start_exists) เป็นจริงกับ [5, 10, 15] ไอดีไหนบ้าง
+         *   3. ถ้าเป็นจริงทั้งหมดทั้ง 5 10 15 แปลว่า
+         */
+
+        // step 1
+        $roomsThoseMeetAttendeeRequirement = MedicineMeetingRoom::query()
+                  ->where('minimum_attendees', '<=', $attendees)
+                  ->where('maximum_attendees', '>=', $attendees)
+                  ->get();
+
+        $reply['meet_attendee'] = $roomsThoseMeetAttendeeRequirement->pluck('id');
+
+        // step 2
+        $unavailableRooms = MedicineBookingMeetingRoom::query()
+                              ->where('start', '<=', $enddate)
+                              ->where('end', '>=', $startdate)
+                              ->whereIn('meeting_room_id', $roomsThoseMeetAttendeeRequirement->pluck('id'))
+                              ->get();
+        /**
+         * 1 นำค่าของ $unavailableRooms แต่ละตัว ทดสอบว่าอยู่ใน ค่า id ของ $roomsThoseMeetAttendeeRequirement หรือไม่.
+         */
+        $result = [];
+        foreach ($roomsThoseMeetAttendeeRequirement as $room) {
+            // $result[]['room'] = $room;
+            // if ($unavailableRooms->pluck('meeting_room_id')->contains($room->id)) {
+            //     $result[]['available'] = false;
+            //     $result[]['status'] = 'แสดงเวลาที่ห้องถูกใช้ในวันนั้น';
+            // } else {
+            //     $result[]['available'] = true;
+            //     $result[]['status'] = 'ready';
+            // }
+
+            $tmp = [];
+            $tmp['room'] = $room;
+            if ($unavailableRooms->pluck('meeting_room_id')->contains($room->id)) {
+                $tmp['available'] = false;
+                $tmp['status'] = 'แสดงเวลาที่ห้องถูกใช้ในวันนั้น';
+            } else {
+                $tmp['available'] = true;
+                $tmp['status'] = 'ready';
+            }
+            $result[] = $tmp;
+
+            // $roomStatus['id'] = $unavailable->meeting_room_id;
+            // if ($roomsThoseMeetAttendeeRequirement->pluck('id')->contains($unavailable->meeting_room_id)) {
+            //     $roomStatus['available'] = false;
+            // } else {
+            //     $roomStatus['available'] = true;
+            // }
+        }
+
+        return $result;
+
+        $reply['unavailable'] = $unavailableRooms;
+        //   $rooms = [
+        //       ['id' => 1, 'available' => true, 'room' => $room1, 'status' => 'ready'],
+        //       ['id' => 16, 'available' => false, 'room' => $room16, 'status' => 'แสดงเวลาที่ห้องถูกใช้ในวันนั้น'],
+        //    ];
+
+        return  $reply;
+
+        $timestampstartdate = date('Y-m-d H:i:s', strtotime($startdate));
+        $timestampenddate = date('Y-m-d H:i:s', strtotime($enddate));
+        $bookings = MedicineBookingMeetingRoom::whereTime('start', '>=', $timestampstartdate)->get();
+        $meetingRooms = MedicineMeetingRoom::where('minimum_attendees', '<=', $attendees)->where('maximum_attendees', '>=', $attendees)->get();
+
+        $time = $startdate . ' => ' . $timestampstartdate;
+
+        return $time;
     }
 
     /**
