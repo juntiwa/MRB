@@ -14,7 +14,7 @@ class DivisionMeetingRoomController extends Controller
      */
     public function index()
     {
-        //
+        return view('division');
     }
 
     /**

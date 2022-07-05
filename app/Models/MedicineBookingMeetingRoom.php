@@ -21,5 +21,7 @@ class MedicineBookingMeetingRoom extends Model
   ];
     protected $casts = [
       'equipment' => AsArrayObject::class,
+      'start' => 'datetime',
+      'end' => 'datetime',
   ];
 }
