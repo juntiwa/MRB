@@ -34,3 +34,23 @@ Route::controller(DivisionMeetingRoomBookingController::class)->group(function (
     Route::get('division-meeting-rooms-booking', 'index')->name('division.rooms.booking');
     Route::get('division-meeting-room-booking', 'store')->name('division.store');
 });
+
+Route::get('share-data-a', function () {
+    $data = 'foo hey';
+    session()->put('data-a', $data);
+
+    return [
+      'data-a' => session()->get('data-a'),
+      'data-b' => session()->get('data-b'),
+    ];
+});
+
+Route::get('share-data-b', function () {
+    $data = 'bar';
+    session()->put('data-b', $data);
+
+    return [
+      'data-a' => session()->get('data-a'),
+      'data-b' => session()->get('data-b'),
+    ];
+});

@@ -73,6 +73,9 @@ class MedicineMeetingRoomBookingController extends Controller
         $resultcomplete = $sort->values()->all();
         //   return $result;
         $request->flash();
+        session()->put('start', $request->start);
+        session()->put('end', $request->end);
+        session()->put('attendees', $request->attendees);
 
         //   return $oldinput;
 
@@ -86,11 +89,18 @@ class MedicineMeetingRoomBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $medicines = MedicineMeetingRoom::get();
 
-        return view('medicinebooking', ['medicines' => $medicines]);
+        $data = [
+         'start' => session()->get('start'),
+         'end' => session()->get('end'),
+         'attendees' => session()->get('attendees'),
+         'room_id' => $request->room_id,
+        ];
+
+        return view('medicinebooking', ['medicines' => $medicines, 'data' => $data]);
     }
 
     /**
