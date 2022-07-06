@@ -73,8 +73,8 @@ class MedicineMeetingRoomBookingController extends Controller
         $resultcomplete = $sort->values()->all();
         //   return $result;
         $request->flash();
-        session()->put('start', $request->start);
-        session()->put('end', $request->end);
+        session()->put('start', $startdate);
+        session()->put('end', $enddate);
         session()->put('attendees', $request->attendees);
 
         //   return $oldinput;
@@ -91,16 +91,19 @@ class MedicineMeetingRoomBookingController extends Controller
      */
     public function create(Request $request)
     {
-        $medicines = MedicineMeetingRoom::get();
-
         $data = [
          'start' => session()->get('start'),
          'end' => session()->get('end'),
          'attendees' => session()->get('attendees'),
          'room_id' => $request->room_id,
         ];
+        $medicine = MedicineMeetingRoom::where('id', $data['room_id'])->first();
+        session()->put('room_id', $request->room_id);
 
-        return view('medicinebooking', ['medicines' => $medicines, 'data' => $data]);
+        $dataDisplay = 'ช่วงเวลาที่ต้องการจอง ' . $data['start'] . ' ถึง ' . $data['end'] . ' จำนวนผู้เข้าร่วม ' . $data['attendees'] .
+        ' ห้องประชุมที่จอง ' . $medicine->name;
+
+        return view('medicinebooking', ['data' => $dataDisplay]);
     }
 
     /**
@@ -117,9 +120,6 @@ class MedicineMeetingRoomBookingController extends Controller
         // change checkbox "on" => true
         $validated = $request->validate([
            'title' => 'required|string|max:255',
-           'start' => 'required',
-           'end' => 'required',
-           'meeting_room_id' => 'required|exists:medicine_meeting_rooms,id',
            'equipment.computer' => 'regex:/on/i',
            'equipment.lcdprojecter' => 'regex:/on/i',
            'equipment.visualizer' => 'regex:/on/i',
@@ -136,29 +136,24 @@ class MedicineMeetingRoomBookingController extends Controller
 
         $equipment = $validated['equipment'];
         foreach ($equipment as $key => $value) {
-            // if ($key != 'other') {
-            //     $equipment[$key] = true;
-            // }
-            // if ($value == 'on') {
-            //     $equipment[$key] = true;
-            // }
             if ($equipmentCheckList->contains($key)) {
                 $equipment[$key] = true;
             }
         }
         $validated['equipment'] = $equipment;
 
-        //   $bookings = new MedicineBookingMeetingRoom;
-        //   $bookings->title = $request->title;
-        //   $bookings->comment = $request->comment;
-        //   $bookings->start = $request->start;
-        //   $bookings->end = $request->end;
-        //   $bookings->meeting_room_id = $request->meeting_room_id;
-        //   $bookings->name_coordinate = $request->name_coordinate;
-        //   $bookings->equipment = $request->equipment;
-        //   $bookings->save();
+        $bookings = new MedicineBookingMeetingRoom;
+        $bookings->title = $request->title;
+        $bookings->comment = $request->comment;
+        $bookings->start = session()->get('start');
+        $bookings->end = session()->get('start');
+        $bookings->meeting_room_id = session()->get('room_id');
+        $bookings->attendees = session()->get('attendees');
+        $bookings->name_coordinate = $request->name_coordinate;
+        $bookings->equipment = $request->equipment;
+        $bookings->save();
 
-        MedicineBookingMeetingRoom::create($validated);
+        //   MedicineBookingMeetingRoom::create($validated);
 
         return Redirect::route('medicine.rooms.booking');
     }

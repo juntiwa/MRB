@@ -22,31 +22,11 @@
       <label for="attendees">จำนวน</label>
       <input type="text" name="attendees" id="attendees" class="border border-slate-800 rounded" value="{{old('attendees')}}" required>
       <p class="mr-2"><input type="submit" value="ตรวจสอบเงื่อนไข" class="bg-blue-500 px-2 py-2 rounded text-white cursor-pointer"></p>
-
-      <div class="flex flex-col">
-         {{-- @if($result ?? null)
-         @foreach ($result as $result)
-         <input
-            type="radio"
-            name="room_id"
-            id="room_id"
-            value="{{$result['room']->id}}"
-            @disabled(!$result['available'])>{{ $result['status'] }} <br>
-            
-            @endforeach
-            @endif --}}
-            
-            {{-- @if ($result['available'])
-            <input type="radio" name="room_id" id="room_id" value="{{$result['room']->id}}">{{$result['room']->name}} <br>
-            @else
-            <input type="radio" name="room_id" id="room_id" @disabled(!$result['available'])>{{$result['room']->name . ' ' . $result['status'] }} 
-            <br>
-            @endif --}}
-      </div>
    </form>
 
    @if($result ?? null)
-   <form action="{{route('medicine.create')}}" method="get">
+   <form action="{{route('medicine.create')}}" method="POST">
+      @csrf
       <div class="flex flex-col">
          @foreach ($result as $result)
          <input

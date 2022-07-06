@@ -16,9 +16,10 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->text('comment')->nullable();
-            $table->timestamp('start');
-            $table->timestamp('end');
+            $table->timestamp('start')->nullable();
+            $table->timestamp('end')->nullable();
             $table->unsignedSmallInteger('meeting_room_id');
+            $table->unsignedSmallInteger('attendees');
             $table->string('name_coordinate')->nullable();
             $table->json('equipment')->nullable();
             $table->timestamps();
