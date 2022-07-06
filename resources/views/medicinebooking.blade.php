@@ -58,5 +58,10 @@
      </div>
       
    </form>
+
+   {{ $data['start'] }}
+   {{ $data['end'] }}
+   {{ $data['attendees'] }}
+   {{ $data['room_id'] }}
 </body>
 </html>

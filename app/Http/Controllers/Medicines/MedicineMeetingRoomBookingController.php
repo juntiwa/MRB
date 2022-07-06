@@ -15,9 +15,73 @@ class MedicineMeetingRoomBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('condition');
+        if (
+         !$request->has('start')
+         || !$request->has('end')
+         || !$request->has('attendees')
+      ) {
+            return view('condition');
+        }
+
+        $startdate = date('Y-m-d H:i:s', strtotime($request->get('start')));
+        $enddate = date('Y-m-d H:i:s', strtotime($request->get('end')));
+        $attendees = $request->get('attendees');
+
+        // step 1
+        $roomsThoseMeetAttendeeRequirement = MedicineMeetingRoom::query()
+                  ->where('minimum_attendees', '<=', $attendees)
+                  ->where('maximum_attendees', '>=', $attendees)
+                  ->get();
+
+        $reply['meet_attendee'] = $roomsThoseMeetAttendeeRequirement->pluck('id');
+
+        // step 2
+        $unavailableRooms = MedicineBookingMeetingRoom::query()
+                              ->where('start', '<=', $enddate)
+                              ->where('end', '>=', $startdate)
+                              ->whereIn('meeting_room_id', $roomsThoseMeetAttendeeRequirement->pluck('id'))
+                              ->get();
+        /**
+         * 1 นำค่าของ $unavailableRooms แต่ละตัว ทดสอบว่าอยู่ใน ค่า id ของ $roomsThoseMeetAttendeeRequirement หรือไม่.
+         */
+        $result = [];
+        logger($unavailableRooms);
+        foreach ($roomsThoseMeetAttendeeRequirement as $room) {
+            $tmp = [];
+            $tmp['room'] = $room;
+            if ($unavailableRooms->pluck('meeting_room_id')->contains($room->id)) {
+                $tmp['available'] = false;
+                logger('room id: ' . $room->id . ' unavailable');
+                //  เพิ่ม loop สำหรับแสดงเวลา
+                foreach ($unavailableRooms as $unavailable) {
+                    if ($room->id == $unavailable->meeting_room_id) {
+                        $tmp['status'] = $room->name . ' ไม่สามารถจองได้เนื่องจากถูกจองแล้วช่วง ' . $unavailable->start->format('d-m-Y H:i:s') . ' ถึง ' . $unavailable->end->format('d-m-Y H:i:s');
+                    }
+                    //   $tmp['start'] = date('d-m-Y H:i:s', strtotime($unavailable->start));
+                  //   $tmp['end'] = date('d-m-Y H:i:s', strtotime($unavailable->end));
+                }
+            } else {
+                $tmp['available'] = true;
+                $tmp['status'] = $room->name;
+            }
+            $result[] = $tmp;
+        }
+        $col = collect($result);
+        $sort = $col->sortBy('available');
+        $resultcomplete = $sort->values()->all();
+        //   return $result;
+        $request->flash();
+        session()->put('start', $request->start);
+        session()->put('end', $request->end);
+        session()->put('attendees', $request->attendees);
+
+        //   return $oldinput;
+
+        return view('condition')->with(['result' => $resultcomplete]);
+
+        return 'todo';
     }
 
     /**
@@ -25,11 +89,18 @@ class MedicineMeetingRoomBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $medicines = MedicineMeetingRoom::get();
 
-        return view('medicinebooking', ['medicines' => $medicines]);
+        $data = [
+         'start' => session()->get('start'),
+         'end' => session()->get('end'),
+         'attendees' => session()->get('attendees'),
+         'room_id' => $request->room_id,
+        ];
+
+        return view('medicinebooking', ['medicines' => $medicines, 'data' => $data]);
     }
 
     /**
@@ -139,7 +210,12 @@ class MedicineMeetingRoomBookingController extends Controller
             // $result[]['room'] = $room;
             // if ($unavailableRooms->pluck('meeting_room_id')->contains($room->id)) {
             //     $result[]['available'] = false;
-            //     $result[]['status'] = 'แสดงเวลาที่ห้องถูกใช้ในวันนั้น';
+            //     //  เพิ่ม loop สำหรับแสดงเวลา
+            //     foreach ($unavailableRooms as $unavailable) {
+            //         if ($room->id == $unavailable->meeting_room_id) {
+            //             $result[]['status'] = 'no ready ' . $unavailable->start;
+            //         }
+            //     }
             // } else {
             //     $result[]['available'] = true;
             //     $result[]['status'] = 'ready';
@@ -149,7 +225,10 @@ class MedicineMeetingRoomBookingController extends Controller
             $tmp['room'] = $room;
             if ($unavailableRooms->pluck('meeting_room_id')->contains($room->id)) {
                 $tmp['available'] = false;
-                $tmp['status'] = 'แสดงเวลาที่ห้องถูกใช้ในวันนั้น';
+                //  เพิ่ม loop สำหรับแสดงเวลา
+                foreach ($unavailableRooms as $unavailable) {
+                    $tmp['status'] = 'no ready ' . $unavailable->start;
+                }
             } else {
                 $tmp['available'] = true;
                 $tmp['status'] = 'ready';
@@ -163,6 +242,8 @@ class MedicineMeetingRoomBookingController extends Controller
             //     $roomStatus['available'] = true;
             // }
         }
+
+        // return back()->with('result', $result);
 
         return $result;
 
