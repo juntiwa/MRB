@@ -15,7 +15,7 @@ class Division extends Model
 
     //  public function division()
     //  {
-    //    depertment has many divisions <==> division belongs to department
+    //  depertment has many divisions <==> division belongs to department
     //      // return $this->belongsTo(Department::class, 'foreign_key', 'owner_key');
     //      return $this->belongsTo(Department::class, 'department_id', 'id');
     //  }

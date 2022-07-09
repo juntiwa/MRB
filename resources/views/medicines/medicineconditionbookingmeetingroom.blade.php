@@ -10,8 +10,8 @@
 <body>
 <div class="container">
     <a href="{{route('medicine.meeting.rooms')}}" >=>รายละเอียดห้องประชุมภาควิชา</a><br>
-    @if ($message ?? null)
-        <p class="text-danger">{{$message}}</p>
+    @if (session('message'))
+        <p class="text-danger">{{session('message')}}</p>
     @endif
     <form action="{{route('medicine.condition.booking.meeting.rooms')}}" method="get">
         <label for="datetime" style="padding-bottom: 10px">วันที่จอง</label>
