@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>Document</title>
+   <title>กรอกข้อมูลเพื่อจองห้องประชุม</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -20,7 +20,7 @@
 @endif
 
 <form action="{{route('medicine.booking.meeting.room.store')}}" method="POST">
-    @csrf   
+    @csrf
     <div class="container d-flex flex-column">
        <p>{{$data}}</p>
         <label for="title">หัวเรื่อง</label>

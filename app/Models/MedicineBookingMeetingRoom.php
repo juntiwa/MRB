@@ -11,18 +11,24 @@ class MedicineBookingMeetingRoom extends Model
     use HasFactory;
 
     protected $fillable = [
-      'title',
-      'comment',
-      'start',
-      'end',
-      'attendees',
-      'meeting_room_id',
-      'name_coordinate',
-      'equipment',
-  ];
+        'title',
+        'comment',
+        'start',
+        'end',
+        'attendees',
+        'meeting_room_id',
+        'name_coordinate',
+        'equipment',
+    ];
     protected $casts = [
-      'equipment' => AsArrayObject::class,
-      'start' => 'datetime',
-      'end' => 'datetime',
-  ];
+        'equipment' => AsArrayObject::class,
+        'start' => 'datetime',
+        'end' => 'datetime',
+    ];
+
+    public function scopeOverlap($query, $start, $end)
+    {
+        $query->where('start', '<=', $end)
+            ->where('end', '>=', $start);
+    }
 }
