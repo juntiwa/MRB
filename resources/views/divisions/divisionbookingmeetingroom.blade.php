@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>กรอกข้อมูลเพื่อจองห้องประชุม</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<form action="{{route('division.booking.meeting.room.store')}}" method="POST">
+    @csrf
+    <div class="container d-flex flex-column">
+       <p>{{$data}}</p>
+        <label for="title">หัวเรื่อง</label>
+        <input type="text" name="title" id="title" value="foo" required>
+
+        <label for="name_coordinate">ชื่อผู้ประสานงาน</label>
+        <input type="text" name="name_coordinate" id="name_coordinate" value="bar">
+
+        <label for="comment">รายละเอียดเพิ่มเติม</label>
+        <textarea name="comment" id="comment"  value="{{old('comment')}}">comment</textarea>
+
+        <div>
+         <p><input type="submit" class="btn btn-info" value="บันทึกการจอง"></p>
+        </div>
+
+    </div>
+</form>
+</body>
+</html>

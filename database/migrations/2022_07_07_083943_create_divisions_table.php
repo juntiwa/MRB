@@ -15,9 +15,9 @@ return new class extends Migration {
         Schema::create('divisions', function (Blueprint $table) {
             $table->id(); // unsigned big integer
             $table->string('name_th');
-            $table->string('name_short_th');
-            $table->string('name_en');
-            $table->string('name_short_en');
+            $table->string('name_short_th')->nullable();
+            $table->string('name_en')->nullable();
+            $table->string('name_short_en')->nullable();
             $table->foreignId('department_id')->constrained();
             $table->boolean('active')->default(true);
             $table->timestamps();

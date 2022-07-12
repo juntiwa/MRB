@@ -77,11 +77,17 @@ class MedicineBookingMeetingRoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        if (true) {
-            return Redirect::route('medicine.condition.booking.meeting.rooms');
-        }
+      
+         if (
+            !$request->session()->get('start')
+            || !$request->session()->get('end')
+            || !$request->session()->get('attendees')
+         ) {
+               return Redirect::route('medicine.condition.booking.meeting.rooms');
+         }
+        
         $data = [
             'start' => session()->get('start'),
             'end' => session()->get('end'),
