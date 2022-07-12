@@ -24,6 +24,6 @@ class MedicineMeetingRoom extends Model
     ];
 
     protected $casts = [
-    'images' => 'array',
+       'images' => 'array',
     ];
 }

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Divisions\DivisionBookingMeetingRoomController;
+use App\Http\Controllers\Divisions\DivisionMeetingRoomController;
+use App\Http\Controllers\Import\MedicineMeetingRoomImportController;
+use App\Http\Controllers\Medicines\MedicineBookingMeetingRoomController;
 use App\Http\Controllers\Medicines\MedicineMeetingRoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,13 +26,23 @@ Route::controller(MedicineMeetingRoomController::class)->group(function () {
     Route::get('medicine-meeting-rooms', 'index')->name('medicine.meeting.rooms');
 });
 
-Route::controller(\App\Http\Controllers\Medicines\MedicineBookingMeetingRoomController::class)->group(function (){
-    Route::get('medicine-condition-booking-meeting-rooms','index')->name('medicine.condition.booking.meeting.rooms');
-    Route::post('medicine-selectroom-booking-meeting-rooms','selectRoom')->name('medicine.booking.meeting.room.selectRoom');
-    Route::get('medicine-booking-meeting-rooms','create')->name('medicine.booking.meeting.room.create');
-    Route::post('medicine-booking-meeting-room-store','store')->name('medicine.booking.meeting.room.store');
+Route::controller(MedicineBookingMeetingRoomController::class)->group(function () {
+    Route::get('medicine-condition-booking-meeting-rooms', 'index')->name('medicine.condition.booking.meeting.rooms');
+    Route::post('medicine-selectroom-booking-meeting-rooms', 'selectRoom')->name('medicine.booking.meeting.room.selectRoom');
+    Route::get('medicine-booking-meeting-rooms', 'create')->name('medicine.booking.meeting.room.create');
+    Route::post('medicine-booking-meeting-room-store', 'store')->name('medicine.booking.meeting.room.store');
 });
 
+Route::controller(DivisionMeetingRoomController::class)->group(function () {
+    Route::get('division-meeting-rooms', 'index')->name('division.meeting.rooms');
+});
+
+Route::controller(DivisionBookingMeetingRoomController::class)->group(function () {
+    Route::get('division-condition-booking-meeting-rooms', 'index')->name('division.condition.booking.meeting.rooms');
+    Route::post('division-selectroom-booking-meeting-rooms', 'selectRoom')->name('division.booking.meeting.room.selectRoom');
+    Route::get('division-booking-meeting-rooms', 'create')->name('division.booking.meeting.room.create');
+    Route::post('division-booking-meeting-room-store', 'store')->name('division.booking.meeting.room.store');
+});
 
 //import
-Route::get('medicine-room-import',\App\Http\Controllers\Import\MedicineMeetingRoomImportController::class)->name('medicine.room.import');
+Route::post('medicine-room-import', MedicineMeetingRoomImportController::class)->name('medicine.room.import');
