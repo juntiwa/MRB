@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->unsignedSmallInteger('attendees');
             $table->string('name_coordinate')->nullable();
             $table->json('equipment')->nullable();
+            $table->unsignedTinyInteger('status')->default(1); // booked, approved, disapproved, canceled
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->foreignId('meeting_room_id');
             $table->foreign('meeting_room_id')->references('id')->on('division_meeting_rooms');
             $table->string('name_coordinate')->nullable();
+            $table->unsignedTinyInteger('status')->default(1); // booked, approved, disapproved, canceled
             $table->timestamps();
         });
     }

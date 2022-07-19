@@ -41,7 +41,7 @@ class MedicineBookingMeetingRoomController extends Controller
             ->overlap($startdate, $enddate)
             ->whereIn('meeting_room_id', $roomsThoseMeetAttendeeRequirement->pluck('id'))
             ->get();
-       
+
         $result = [];
         logger($unavailableRooms);
         foreach ($roomsThoseMeetAttendeeRequirement as $room) {
@@ -69,7 +69,7 @@ class MedicineBookingMeetingRoomController extends Controller
         session()->put('end', $enddate);
         session()->put('attendees', $request->attendees);
 
-        return view('medicines.medicineconditionbookingmeetingroom')->with(['result' => $resultcomplete,'medicinebooking'=>$medicinebooking]);
+        return view('medicines.medicineconditionbookingmeetingroom')->with(['result' => $resultcomplete, 'medicinebooking'=>$medicinebooking]);
     }
 
     /**
@@ -79,15 +79,15 @@ class MedicineBookingMeetingRoomController extends Controller
      */
     public function create(Request $request)
     {
-      
-         if (
+        if (
             !$request->session()->get('start')
             || !$request->session()->get('end')
             || !$request->session()->get('attendees')
-         ) {
-               return Redirect::route('medicine.condition.booking.meeting.rooms');
-         }
-        
+            || !$request->session()->get('selected_room_id')
+        ) {
+            return Redirect::route('medicine.condition.booking.meeting.rooms');
+        }
+
         $data = [
             'start' => session()->get('start'),
             'end' => session()->get('end'),
@@ -98,6 +98,7 @@ class MedicineBookingMeetingRoomController extends Controller
         session()->put('room_id', $data['room_id']);
         $dataDisplay = 'ช่วงเวลาที่ต้องการจอง ' . $data['start'] . ' ถึง ' . $data['end'] . ' จำนวนผู้เข้าร่วม ' . $data['attendees'] .
             ' ห้องประชุมที่จอง ' . $medicine->name;
+
         return view('medicines.medicinebookingmeetingroom', ['data' => $dataDisplay]);
     }
 
@@ -136,6 +137,7 @@ class MedicineBookingMeetingRoomController extends Controller
                 'end' => $validated['end'],
                 'attendees' => $validated['attendees'],
             ];
+
             return Redirect::route('medicine.condition.booking.meeting.rooms', $params)->with(['message' => $message]);
         }
 
@@ -160,7 +162,9 @@ class MedicineBookingMeetingRoomController extends Controller
         session()->forget('end');
         session()->forget('attendees');
 
-        return Redirect::route('medicine.condition.booking.meeting.rooms');
+        $message = 'จองสำเร็จ';
+
+        return Redirect::route('medicine.condition.booking.meeting.rooms')->with(['message' => $message]);
     }
 
     /**
@@ -212,6 +216,7 @@ class MedicineBookingMeetingRoomController extends Controller
     {
         $validated = $request->validate(['room_id' => 'required|exists:medicine_meeting_rooms,id']);
         session()->put('selected_room_id', $validated['room_id']);
+
         return redirect()->route('medicine.booking.meeting.room.create');
     }
 }

@@ -53,6 +53,7 @@
          <th>หมายเลขห้อง</th>
          <th>ผู้เข้าร่วม</th>
          <th>ผู้ประสานงาน</th>
+         <th>สถานะ</th>
       </thead>
       @foreach ($medicinebooking as $medicine)
       <tbody>
@@ -63,6 +64,7 @@
          <td> {{$medicine->meeting_room_id}} </td>
          <td> {{$medicine->attendees}} </td>
          <td> {{$medicine->name_coordinate}} </td>
+         <td> {{$medicine->status}} </td>
          {{-- <td> {{$medicine->equipment}} </td> --}}
       </tbody>
       @endforeach

@@ -73,6 +73,7 @@ class DivisionBookingMeetingRoomController extends Controller
         if (
             !$request->session()->get('start')
             || !$request->session()->get('end')
+            || !$request->session()->get('selected_room_id')
         ) {
             return Redirect::route('division.condition.booking.meeting.rooms');
         }
