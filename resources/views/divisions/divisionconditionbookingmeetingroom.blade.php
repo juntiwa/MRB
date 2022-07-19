@@ -50,6 +50,7 @@
          <th>เวลาสิ้นสุด</th>
          <th>หมายเลขห้อง</th>
          <th>ผู้ประสานงาน</th>
+         <th>สถานะ</th>
       </thead>
       @foreach ($divisionbooking as $division)
       <tbody>
@@ -59,6 +60,7 @@
          <td> {{$division->end}} </td>
          <td> {{$division->meeting_room_id}} </td>
          <td> {{$division->name_coordinate}} </td>
+         <td> {{$division->status}} </td>
       </tbody>
       @endforeach
    </table>
