@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\BookingStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +21,9 @@ class DivisionBookingMeetingRoom extends Model
     protected $casts = [
         'start' => 'datetime',
         'end' => 'datetime',
+        'status' => BookingStatus::class,
     ];
+
     public function scopeOverlap($query, $start, $end)
     {
         $query->where('start', '<=', $end)

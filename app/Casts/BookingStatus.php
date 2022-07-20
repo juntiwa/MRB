@@ -1,13 +1,15 @@
 <?php
- 
+
 namespace App\Casts;
- 
+
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
- 
+
 class BookingStatus implements CastsAttributes
 {
-   protected $statuses = ['', 'booked', 'approved', 'disapproved', 'canceled']; 
-   /**
+    protected $statuses = ['', 'booked', 'approved', 'disapproved', 'canceled'];
+    protected $statusesThai = ['', 'รออนุมัติ', 'อนุมัติแล้ว', 'ไม่อนุมัติ', 'ยกเลิกการจอง'];
+
+    /**
      * Cast the given value.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
@@ -18,9 +20,9 @@ class BookingStatus implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
-        return $this->statuses[$value] ?? '#na';
+        return $this->statusesThai[$value] ?? '#na';
     }
- 
+
     /**
      * Prepare the given value for storage.
      *
@@ -37,6 +39,6 @@ class BookingStatus implements CastsAttributes
 
     public function __invoke(string $value): int
     {
-         return array_search($value, $this->statuses);
+        return array_search($value, $this->statuses);
     }
 }
