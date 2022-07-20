@@ -21,6 +21,7 @@ class MedicineBookingMeetingRoom extends Model
         'meeting_room_id',
         'name_coordinate',
         'equipment',
+        'requester_id'
     ];
     protected $casts = [
         'equipment' => AsArrayObject::class,
@@ -28,6 +29,15 @@ class MedicineBookingMeetingRoom extends Model
         'end' => 'datetime',
         'status' => BookingStatus::class,
     ];
+
+    public function requester() // request_id => id
+    {
+      return $this->belongsTo(User::class);
+   }
+   public function approver() // approver_id => id
+    {
+      return $this->belongsTo(User::class);
+    }
 
    //  protected function status(): Attribute
    //  {

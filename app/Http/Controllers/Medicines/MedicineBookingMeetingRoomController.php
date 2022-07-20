@@ -155,6 +155,7 @@ class MedicineBookingMeetingRoomController extends Controller
             }
         }
         $validated['equipment'] = $equipment;
+        $validated['requester_id'] = 1; // $request->user()->id;
 
         MedicineBookingMeetingRoom::create($validated);
 
