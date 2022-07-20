@@ -21,9 +21,13 @@ return new class extends Migration {
             $table->foreignId('meeting_room_id');
             $table->foreign('meeting_room_id')->references('id')->on('medicine_meeting_rooms');
             $table->unsignedSmallInteger('attendees');
+            $table->foreignId('requester_id');
+            $table->foreign('requester_id')->references('id')->on('users');
             $table->string('name_coordinate')->nullable();
             $table->json('equipment')->nullable();
             $table->unsignedTinyInteger('status')->default(1); // booked, approved, disapproved, canceled
+            $table->foreignId('approver_id')->nullable();
+            $table->foreign('approver_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
