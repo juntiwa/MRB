@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->foreign('requester_id')->references('id')->on('users');
             $table->string('name_coordinate')->nullable();
             $table->unsignedTinyInteger('status')->default(1); // booked, approved, disapproved, canceled
+            $table->string('reason')->nullable();
             $table->foreignId('approver_id');
             $table->foreign('approver_id')->references('id')->on('users');
             $table->timestamps();
