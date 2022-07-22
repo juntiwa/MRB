@@ -2,12 +2,22 @@
 
 namespace App\Models;
 
+use App\Traits\CSVLoadable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Division extends Model
 {
-    use HasFactory;
+    use HasFactory, CSVLoadable;
+
+    protected $fillable = [
+      'name_th',
+      'name_short_th',
+      'name_en',
+      'name_short_en',
+      'department_id',
+    ];
+    
     public function department()
     {
         return $this->belongsTo(Department::class);

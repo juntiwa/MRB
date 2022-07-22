@@ -20,8 +20,12 @@ return new class extends Migration {
             $table->timestamp('end')->nullable();
             $table->foreignId('meeting_room_id');
             $table->foreign('meeting_room_id')->references('id')->on('division_meeting_rooms');
+            $table->foreignId('requester_id');
+            $table->foreign('requester_id')->references('id')->on('users');
             $table->string('name_coordinate')->nullable();
             $table->unsignedTinyInteger('status')->default(1); // booked, approved, disapproved, canceled
+            $table->foreignId('approver_id');
+            $table->foreign('approver_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
