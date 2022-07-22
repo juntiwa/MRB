@@ -5,6 +5,8 @@ use App\Http\Controllers\Divisions\DivisionMeetingRoomController;
 use App\Http\Controllers\Import\MedicineMeetingRoomImportController;
 use App\Http\Controllers\Medicines\MedicineBookingMeetingRoomController;
 use App\Http\Controllers\Medicines\MedicineMeetingRoomController;
+use App\Http\Controllers\Medicines\MedicineReasonStatusController;
+use App\Http\Controllers\ReasonStatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,7 @@ Route::controller(MedicineBookingMeetingRoomController::class)->group(function (
     Route::post('medicine-selectroom-booking-meeting-rooms', 'selectRoom')->name('medicine.booking.meeting.room.selectRoom');
     Route::get('medicine-booking-meeting-rooms', 'create')->name('medicine.booking.meeting.room.create');
     Route::post('medicine-booking-meeting-room-store', 'store')->name('medicine.booking.meeting.room.store');
+    Route::post('medicine-booking-meeting-room-update/{id}','update')->name('medicine.booking.meeting.room.update');
 });
 
 Route::controller(DivisionMeetingRoomController::class)->group(function () {
@@ -42,6 +45,11 @@ Route::controller(DivisionBookingMeetingRoomController::class)->group(function (
     Route::post('division-selectroom-booking-meeting-rooms', 'selectRoom')->name('division.booking.meeting.room.selectRoom');
     Route::get('division-booking-meeting-rooms', 'create')->name('division.booking.meeting.room.create');
     Route::post('division-booking-meeting-room-store', 'store')->name('division.booking.meeting.room.store');
+});
+
+Route::controller(MedicineReasonStatusController::class)->group(function(){
+   Route::get('medicine-reasons','index')->name('medicine.reasons');
+   Route::post('medicine-reason-store','store')->name('medicine.reason.store');
 });
 
 //import

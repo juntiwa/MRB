@@ -199,7 +199,17 @@ class MedicineBookingMeetingRoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $validated = $request->validate([
+         'status' => 'required',
+      ]);
+      session()->put('id',$id);
+      MedicineBookingMeetingRoom::where('id',$id)->update(['status'=>$validated['status'],'approver_id'=>'2']);
+      if($validated['status'] == 2){
+        return redirect()->route('medicine.condition.booking.meeting.rooms');
+      }else{
+         return redirect()->route('medicine.reasons');
+      }
+
     }
 
     /**

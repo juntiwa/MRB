@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ห้องประขุมภาควิชา</title>
+    <title>ห้องประชุมภาควิชา</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -53,7 +53,11 @@
          <th>หมายเลขห้อง</th>
          <th>ผู้เข้าร่วม</th>
          <th>ผู้ประสานงาน</th>
+         <th>ผู้จอง</th>
          <th>สถานะ</th>
+         <th>เปลี่ยนแปลงสถานะ</th>
+         <th>เหตุผล</th>
+         <th>ผู้อนุมัติ</th>
       </thead>
       @foreach ($medicinebooking as $medicine)
       <tbody>
@@ -64,7 +68,20 @@
          <td> {{$medicine->meeting_room_id}} </td>
          <td> {{$medicine->attendees}} </td>
          <td> {{$medicine->name_coordinate}} </td>
+         <td> {{$medicine->requester_id}} </td>
          <td> {{$medicine->status}} </td>
+         <td>
+            <form action="{{route('medicine.booking.meeting.room.update', $medicine->id)}}" method="post">
+               @csrf
+               <div class="d-flex flex-column">
+                  <button name="status" type="submit" class="btn btn-primary mt-2" value="2">อนุมัติ</button>
+                  <button name="status" type="submit" class="btn btn-warning mt-2" value="3">ไม่อนุมัติ</button>
+                  <button name="status" type="submit" class="btn btn-danger mt-2" value="4">ยกเลิก</button>
+               </div>
+            </form>
+         </td>
+         <td> {{$medicine->reason}} </td>
+         <td> {{$medicine->approver_id}} </td>
          {{-- <td> {{$medicine->equipment}} </td> --}}
       </tbody>
       @endforeach
