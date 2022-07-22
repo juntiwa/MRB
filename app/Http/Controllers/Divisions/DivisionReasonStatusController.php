@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Divisions;
 
 use App\Http\Controllers\Controller;
+use App\Models\DivisionBookingMeetingRoom;
 use Illuminate\Http\Request;
 
 class DivisionReasonStatusController extends Controller
@@ -12,9 +13,13 @@ class DivisionReasonStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+      if(!$request->session()->get('id')){
+         return redirect()->route('medicine.condition.booking.meeting.rooms');
+      }else{
+         return view('reason');
+      }
     }
 
     /**
@@ -35,7 +40,14 @@ class DivisionReasonStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validated = $request->validate([
+         'reason' => 'required',
+      ]);
+      $validated['id'] = session()->get('id');
+
+      DivisionBookingMeetingRoom::where('id',$validated['id'])->update(['reason'=>$validated['reason']]);
+      session()->forget('id');
+      return redirect()->route('division.condition.booking.meeting.rooms');
     }
 
     /**

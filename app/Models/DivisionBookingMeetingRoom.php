@@ -17,6 +17,8 @@ class DivisionBookingMeetingRoom extends Model
       'end',
       'meeting_room_id',
       'name_coordinate',
+      'requester_id',
+      'approver_id'
     ];
     protected $casts = [
         'start' => 'datetime',

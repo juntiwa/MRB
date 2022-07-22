@@ -50,7 +50,11 @@
          <th>เวลาสิ้นสุด</th>
          <th>หมายเลขห้อง</th>
          <th>ผู้ประสานงาน</th>
+         <th>ผู้จอง</th>
          <th>สถานะ</th>
+         <th>เปลี่ยนแปลงสถานะ</th>
+         <th>เหตุผล</th>
+         <th>ผู้อนุมัติ</th>
       </thead>
       @foreach ($divisionbooking as $division)
       <tbody>
@@ -60,7 +64,20 @@
          <td> {{$division->end}} </td>
          <td> {{$division->meeting_room_id}} </td>
          <td> {{$division->name_coordinate}} </td>
+         <td> {{$division->requester_id}} </td>
          <td> {{$division->status}} </td>
+         <td>
+            <form action="{{route('division.booking.meeting.room.update', $division->id)}}" method="post">
+               @csrf
+               <div class="d-flex flex-column">
+                  <button name="status" type="submit" class="btn btn-primary mt-2" value="2">อนุมัติ</button>
+                  <button name="status" type="submit" class="btn btn-warning mt-2" value="3">ไม่อนุมัติ</button>
+                  <button name="status" type="submit" class="btn btn-danger mt-2" value="4">ยกเลิก</button>
+               </div>
+            </form>
+         </td>
+         <td> {{$division->reason}} </td>
+         <td> {{$division->approver_id}} </td>
       </tbody>
       @endforeach
    </table>

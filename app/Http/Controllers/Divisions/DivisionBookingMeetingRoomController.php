@@ -122,6 +122,7 @@ class DivisionBookingMeetingRoomController extends Controller
             return Redirect::route('division.condition.booking.meeting.rooms', $params)->with(['message' => $message]);
         }
 
+        $validated['requester_id'] = 1; // $request->user()->id;
         DivisionBookingMeetingRoom::create($validated);
 
         session()->forget('start');
@@ -164,7 +165,16 @@ class DivisionBookingMeetingRoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $validated = $request->validate([
+         'status' => 'required',
+      ]);
+      session()->put('id',$id);
+      DivisionBookingMeetingRoom::where('id',$id)->update(['status'=>$validated['status'],'approver_id'=>'2']);
+      if($validated['status'] == 2){
+        return redirect()->route('division.condition.booking.meeting.rooms');
+      }else{
+         return redirect()->route('division.reasons');
+      }
     }
 
     /**
