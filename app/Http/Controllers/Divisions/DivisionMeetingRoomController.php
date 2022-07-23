@@ -16,8 +16,10 @@ class DivisionMeetingRoomController extends Controller
      */
     public function index()
     {
-      $divisions = DivisionMeetingRoom::get();
-        return view('divisions.divisionmeetingroom',['divisions'=>$divisions]);
+        $divisions = Division::get();
+        $divisionsRoom = DivisionMeetingRoom::get();
+
+        return view('divisions.divisionmeetingroom', ['divisions'=>$divisions, 'divisionsRoom'=>$divisionsRoom]);
     }
 
     /**
@@ -38,9 +40,15 @@ class DivisionMeetingRoomController extends Controller
      */
     public function store(Request $request)
     {
-        $divisions = Division::get();
-
-        return view('divisions.divisionmeetingroom', ['division'=>$divisions]);
+      $validated = $request->validate([
+         'name' => 'required',
+         'short_name' => 'required',
+         'location' => 'required',
+         'images' => 'required',
+         'division_id' => 'required' //Auth->user()->division_id
+      ]);
+      DivisionMeetingRoom::create($validated);
+      return redirect()->route('division.meeting.rooms');
     }
 
     /**
