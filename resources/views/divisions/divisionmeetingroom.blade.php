@@ -9,20 +9,29 @@
 </head>
 <body>
    <div class="container">
-      <a href="{{route('division.condition.booking.meeting.rooms')}}"> =>จองห้องประชุม</a>
-       {{-- <div class="card bg-light mt-3">
-           <div class="card-body">
-               <form action="{{ route('medicine.room.import') }}" method="POST" enctype="multipart/form-data">
-                   @csrf
-                   <input type="file" name="file" class="form-control">
-                   <br>
-                   <button class="btn btn-success">Import Medicine Meeting Room Data</button>
-               </form>
-
-           </div>
-       </div> --}}
+      <a href="{{route('division.condition.booking.meeting.rooms')}}"> => จองห้องประชุม</a>
    </div>
     <div class="container">
+      <form action="{{route('division.meeting.room.create')}}" method="post">
+         @csrf
+         <label for="name">ชื่อห้อง</label>
+         <input type="text" name="name" id="name">
+         <label for="name">ชื่อย่อ</label>
+         <input type="text" name="short_name" id="short_name">
+         <label for="name">สถานที่</label>
+         <input type="text" name="location" id="location">
+         <br>
+         <label for="name">images</label>
+         <input type="text" name="images" id="images">
+         <label for="name">สาขาวิชา</label>
+         <select name="division_id" id="division_id">
+            <option value="">---- เลือกสาขา ----</option></option>
+            @foreach($divisions as $key => $division)
+            <option value="{{$division->id}}">{{$division->name_th}}</option>
+            @endforeach
+         </select>
+         <button type="submit" class="btn btn-primary">เพิ่มห้องประชุม</button>
+      </form>
       <table class="table">
          <thead>
             <th>ชื่อห้อง</th>
@@ -31,13 +40,13 @@
             <th>สาขาวิชา</th>
             <th>images</th>
          </thead>
-         @foreach ($divisions as $division)
+         @foreach ($divisionsRoom as $divisionRoom)
          <tbody>
-            <td> {{$division->name}} </td>
-            <td> {{$division->short_name}} </td>
-            <td> {{$division->location}} </td>
-            <td> {{$division->division_id}} </td>
-            {{-- <td> {{$division->images}} </td> --}}
+            <td> {{$divisionRoom->name}} </td>
+            <td> {{$divisionRoom->short_name}} </td>
+            <td> {{$divisionRoom->location}} </td>
+            <td> {{$divisionRoom->division_id}} </td>
+            {{-- <td> {{$divisionRoom->images}} </td> --}}
          </tbody>
          @endforeach
       </table>

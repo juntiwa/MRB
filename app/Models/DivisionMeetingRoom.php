@@ -10,4 +10,11 @@ class DivisionMeetingRoom extends Model
 {
    use HasFactory, CSVLoadable;
 
+   protected $fillable = [
+      'name',
+      'short_name',
+      'location',
+      'images',
+      'division_id'
+   ];
 }
