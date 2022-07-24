@@ -10,6 +10,16 @@
 <body>
    <div class="container">
       <a href="{{route('division.condition.booking.meeting.rooms')}}"> => จองห้องประชุม</a>
+      <div class="card bg-light mt-3">
+         <div class="card-body">
+             <form action="{{ route('division.room.import') }}" method="POST" enctype="multipart/form-data">
+                 @csrf
+                 <input type="file" name="file" class="form-control">
+                 <br>
+                 <button class="btn btn-success">Import Division Meeting Room Data</button>
+             </form>
+         </div>
+     </div>
    </div>
     <div class="container">
       <form action="{{route('division.meeting.room.create')}}" method="post">
