@@ -12,35 +12,49 @@
       <a href="{{route('division.condition.booking.meeting.rooms')}}"> => จองห้องประชุม</a>
       <div class="card bg-light mt-3">
          <div class="card-body">
-             <form action="{{ route('division.room.import') }}" method="POST" enctype="multipart/form-data">
-                 @csrf
-                 <input type="file" name="file" class="form-control">
-                 <br>
-                 <button class="btn btn-success">Import Division Meeting Room Data</button>
-             </form>
+            <form action="{{ route('division.room.import') }}" method="POST" enctype="multipart/form-data">
+               @csrf
+               <input type="file" name="file" class="form-control">
+               <br>
+               <button class="btn btn-success">Import Division Meeting Room Data</button>
+            </form>
          </div>
-     </div>
+      </div>
    </div>
-    <div class="container">
+   <div class="container mt-5">
       <form action="{{route('division.meeting.room.create')}}" method="post">
          @csrf
-         <label for="name">ชื่อห้อง</label>
-         <input type="text" name="name" id="name">
-         <label for="name">ชื่อย่อ</label>
-         <input type="text" name="short_name" id="short_name">
-         <label for="name">สถานที่</label>
-         <input type="text" name="location" id="location">
-         <br>
-         <label for="name">images</label>
-         <input type="text" name="images" id="images">
-         <label for="name">สาขาวิชา</label>
-         <select name="division_id" id="division_id">
-            <option value="">---- เลือกสาขา ----</option></option>
-            @foreach($divisions as $key => $division)
-            <option value="{{$division->id}}">{{$division->name_th}}</option>
-            @endforeach
-         </select>
-         <button type="submit" class="btn btn-primary">เพิ่มห้องประชุม</button>
+         <div class="d-flex">
+            <div class="d-flex flex-column me-3">
+               <label for="name">ชื่อห้อง</label>
+               <input class="form-control" type="text" name="name" id="name">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">ชื่อย่อ</label>
+               <input class="form-control" type="text" name="short_name" id="short_name">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">สถานที่</label>
+               <input class="form-control" type="text" name="location" id="location">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">images</label>
+               <input class="form-control" type="text" name="images" id="images">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">สาขาวิชา</label>
+               <select class="form-select" name="division_id" id="division_id">
+                  <option value="">---- เลือกสาขา ----</option>
+                  </option>
+                  @foreach($divisions as $key => $division)
+                  <option value="{{$division->id}}">{{$division->name_th}}</option>
+                  @endforeach
+               </select>
+            </div>
+            <div class="d-flex flex-column justify-content-end">
+               <button type="submit" class="btn btn-primary">เพิ่ม</button>
+            </div>
+         </div>
       </form>
       <table class="table">
          <thead>
@@ -61,7 +75,7 @@
          @endforeach
       </table>
    </div>
-   </body>
-   </html>
+</body>
+</html>
 </body>
 </html>

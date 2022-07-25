@@ -3,7 +3,8 @@
 use App\Http\Controllers\Divisions\DivisionBookingMeetingRoomController;
 use App\Http\Controllers\Divisions\DivisionMeetingRoomController;
 use App\Http\Controllers\Divisions\DivisionReasonStatusController;
-use App\Http\Controllers\Import\MedicineMeetingRoomImportController;
+use App\Http\Controllers\Imports\DivisionMeetingRoomImportController;
+use App\Http\Controllers\Imports\MedicineMeetingRoomImportController;
 use App\Http\Controllers\Medicines\MedicineBookingMeetingRoomController;
 use App\Http\Controllers\Medicines\MedicineMeetingRoomController;
 use App\Http\Controllers\Medicines\MedicineReasonStatusController;
@@ -61,3 +62,4 @@ Route::controller(DivisionReasonStatusController::class)->group(function () {
 
 //import
 Route::post('medicine-room-import', MedicineMeetingRoomImportController::class)->name('medicine.room.import');
+Route::post('division-room-import', DivisionMeetingRoomImportController::class)->name('division.room.import');
