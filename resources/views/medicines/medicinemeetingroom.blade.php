@@ -22,8 +22,45 @@
            </div>
        </div>
    </div>
-    <div class="container">
-      <table class="table">
+    <div class="container mt-3">
+      <form action="{{route('medicine.meeting.room.store')}}" method="post">
+         @csrf
+         <div class="d-flex">
+            <div class="d-flex flex-column me-3">
+               <label for="name">ชื่อห้อง</label>
+               <input class="form-control" type="text" name="name" id="name">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">ชื่อย่อ</label>
+               <input class="form-control" type="text" name="short_name" id="short_name">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">จำนวนผู้เข้าร่วม น้อยสุด</label>
+               <input class="form-control" type="text" name="minimum_attendees" id="minimum_attendees">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">จำนวนผู้เข้าร่วม มากสุด</label>
+               <input class="form-control" type="text" name="maximum_attendees" id="maximum_attendees">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">จำนวนวันที่จองได้</label>
+               <input class="form-control" type="text" name="advance_booking_under_days" id="advance_booking_under_days">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">สถานที่</label>
+               <input class="form-control" type="text" name="location" id="location">
+            </div>
+            <div class="d-flex flex-column me-3">
+               <label for="name">images</label>
+               <input class="form-control" type="text" name="images" id="images">
+            </div>
+           
+            <div class="d-flex flex-column justify-content-end">
+               <button type="submit" class="btn btn-primary">เพิ่ม</button>
+            </div>
+         </div>
+      </form>
+      <table class="table mt-3">
          <thead>
             <th>ชื่อห้อง</th>
             <th>ชื่อย่อ</th>

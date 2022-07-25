@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 Route::controller(MedicineMeetingRoomController::class)->group(function () {
     Route::get('medicine-meeting-rooms', 'index')->name('medicine.meeting.rooms');
+    Route::post('medicine-meeting-room-store', 'store')->name('medicine.meeting.room.store');
 });
 
 Route::controller(MedicineBookingMeetingRoomController::class)->group(function () {
@@ -39,7 +40,7 @@ Route::controller(MedicineBookingMeetingRoomController::class)->group(function (
 
 Route::controller(DivisionMeetingRoomController::class)->group(function () {
     Route::get('division-meeting-rooms', 'index')->name('division.meeting.rooms');
-    Route::post('division-meeting-room-create', 'store')->name('division.meeting.room.create');
+    Route::post('division-meeting-room-store', 'store')->name('division.meeting.room.store');
 });
 
 Route::controller(DivisionBookingMeetingRoomController::class)->group(function () {

@@ -21,8 +21,8 @@
          </div>
       </div>
    </div>
-   <div class="container mt-5">
-      <form action="{{route('division.meeting.room.create')}}" method="post">
+   <div class="container mt-3">
+      <form action="{{route('division.meeting.room.store')}}" method="post">
          @csrf
          <div class="d-flex">
             <div class="d-flex flex-column me-3">
@@ -56,7 +56,7 @@
             </div>
          </div>
       </form>
-      <table class="table">
+      <table class="table mt-3">
          <thead>
             <th>ชื่อห้อง</th>
             <th>ชื่อย่อ</th>
