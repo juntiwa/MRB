@@ -9,7 +9,7 @@
 </head>
 <body>
    <div class="container">
-      <a href="{{route('medicine.condition.booking.meeting.rooms')}}">=>จองห้องประชุม</a>
+      <a href="{{route('medicine.condition.booking.meeting.rooms')}}"> =>จองห้องประชุม</a>
        <div class="card bg-light mt-3">
            <div class="card-body">
                <form action="{{ route('medicine.room.import') }}" method="POST" enctype="multipart/form-data">
