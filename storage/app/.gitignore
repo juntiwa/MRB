@@ -1,5 +1,2 @@
-*
-!public/
-!seeders/
-!.gitignore
-
+/temp
+.DS_Store
