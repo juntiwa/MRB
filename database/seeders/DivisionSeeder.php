@@ -15,9 +15,9 @@ class DivisionSeeder extends Seeder
      */
     public function run()
     {
-      // Division::seed(storage_path('app/seeders/divisions.csv'));
+      Division::seed(storage_path('app/seeders/divisions.csv'));
 
-      $divisions = [
+      /* $divisions = [
          [
             'name_th' => 'สาขาวิชาต่อมไร้ท่อและเมตะบอลิสม',
             'name_short_th' => 'ต่อมไร้ท่อ',
@@ -35,6 +35,6 @@ class DivisionSeeder extends Seeder
       ];
       foreach ($divisions as $division) {
          Division::create($division);
-     }
+     } */
     }
 }

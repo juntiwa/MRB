@@ -8,6 +8,8 @@ trait CSVLoadable
     {
         $item = static::loadCSV($path);
         static::insertRows($item);
+      
+        
     }
 
     public static function loadCSV($path)
