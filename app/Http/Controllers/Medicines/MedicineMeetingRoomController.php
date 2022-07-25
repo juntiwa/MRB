@@ -39,7 +39,17 @@ class MedicineMeetingRoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validated = $request->validate([
+         'name' => 'required',
+         'short_name' => 'required',
+         'minimum_attendees' => 'required',
+         'maximum_attendees' => 'required',
+         'advance_booking_under_days' => 'required',
+         'location' => 'required',
+         'images' => 'required'
+      ]);
+      MedicineMeetingRoom::create($validated);
+        return redirect()->route('medicine.meeting.rooms');
     }
 
     /**

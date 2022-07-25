@@ -11,7 +11,7 @@ class MedicineMeetingRoomImportController extends Controller
 {
    public function __invoke()
    {
-       Excel::import(new MedicineMeetingRoomsImport, request()->file('file'));
+       Excel::import(new MedicineMeetingRoomsImport, request()->file('file')->store('temp'));
 
        return back();
    }
