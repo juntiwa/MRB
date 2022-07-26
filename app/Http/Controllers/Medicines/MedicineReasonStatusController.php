@@ -15,11 +15,11 @@ class MedicineReasonStatusController extends Controller
      */
     public function index(Request $request)
     {
-      if(!$request->session()->get('id')){
-         return redirect()->route('medicine.condition.booking.meeting.rooms');
-      }else{
-         return view('reason');
-      }
+        if (!$request->session()->get('id')) {
+            return redirect()->route('medicine.condition.booking.meeting.rooms');
+        } else {
+            return view('medicines.medicinereason');
+        }
     }
 
     /**
@@ -40,14 +40,15 @@ class MedicineReasonStatusController extends Controller
      */
     public function store(Request $request)
     {
-      $validated = $request->validate([
+        $validated = $request->validate([
          'reason' => 'required',
       ]);
-      $validated['id'] = session()->get('id');
+        $validated['id'] = session()->get('id');
 
-      MedicineBookingMeetingRoom::where('id',$validated['id'])->update(['reason'=>$validated['reason']]);
-      session()->forget('id');
-      return redirect()->route('medicine.condition.booking.meeting.rooms');
+        MedicineBookingMeetingRoom::where('id', $validated['id'])->update(['reason'=>$validated['reason']]);
+        session()->forget('id');
+
+        return redirect()->route('medicine.condition.booking.meeting.rooms');
     }
 
     /**
