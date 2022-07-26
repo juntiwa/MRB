@@ -14,7 +14,7 @@
            <div class="card-body">
                <form action="{{ route('medicine.room.import') }}" method="POST" enctype="multipart/form-data">
                    @csrf
-                   <input type="file" name="file" class="form-control">
+                   <input type="file" name="medicine_file" class="form-control">
                    <br>
                    <button class="btn btn-success">Import Medicine Meeting Room Data</button>
                </form>

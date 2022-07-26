@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\MedicineMeetingRoom;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MedicineMeetingRoomSeeder extends Seeder
@@ -15,7 +14,6 @@ class MedicineMeetingRoomSeeder extends Seeder
      */
     public function run()
     {
-      MedicineMeetingRoom::seed(storage_path('app/seeders/medicine_meeting_rooms.csv'));
-
+        MedicineMeetingRoom::seed(storage_path('app/seeders/medicine_meeting_rooms.csv'));
     }
 }
