@@ -15,11 +15,11 @@ class DivisionReasonStatusController extends Controller
      */
     public function index(Request $request)
     {
-      if(!$request->session()->get('id')){
-         return redirect()->route('medicine.condition.booking.meeting.rooms');
-      }else{
-         return view('reason');
-      }
+        if (!$request->session()->get('id')) {
+            return redirect()->route('division.condition.booking.meeting.rooms');
+        } else {
+            return view('divisions.divisionreason');
+        }
     }
 
     /**
@@ -40,14 +40,15 @@ class DivisionReasonStatusController extends Controller
      */
     public function store(Request $request)
     {
-      $validated = $request->validate([
+        $validated = $request->validate([
          'reason' => 'required',
       ]);
-      $validated['id'] = session()->get('id');
+        $validated['id'] = session()->get('id');
 
-      DivisionBookingMeetingRoom::where('id',$validated['id'])->update(['reason'=>$validated['reason']]);
-      session()->forget('id');
-      return redirect()->route('division.condition.booking.meeting.rooms');
+        DivisionBookingMeetingRoom::where('id', $validated['id'])->update(['reason'=>$validated['reason']]);
+        session()->forget('id');
+
+        return redirect()->route('division.condition.booking.meeting.rooms');
     }
 
     /**

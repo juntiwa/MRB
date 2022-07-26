@@ -9,6 +9,7 @@
 </head>
 <body>
    <div class="container">
+      เหตุผลไม่อนุมัติ หรือ ยกเลิกการจองห้องประชุมภาค
       <form action="{{route('medicine.reason.store')}}" method="post">
          @csrf
          กรอกเหตุผล

@@ -9,7 +9,8 @@
 </head>
 <body>
    <div class="container">
-      <form action="{{route('medicine.reason.store')}}" method="post">
+      เหตุผลไม่อนุมัติ หรือ ยกเลิกการจองห้องประชุมสาขา
+      <form action="{{route('division.reason.store')}}" method="post">
          @csrf
          กรอกเหตุผล
          <input type="text" name="reason" id="reason">
