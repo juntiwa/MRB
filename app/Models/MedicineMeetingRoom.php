@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class MedicineMeetingRoom extends Model
 {
     use HasFactory, CSVLoadable;
-    
+
     /**
      * The attributes that are mass assignable.
      *

@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\DivisionMeetingRoom;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class DivisionMeetingRoomsImport implements ToModel
+class DivisionMeetingRoomsImport implements ToModel, WithHeadingRow
 {
     /**
      * @param array $row
